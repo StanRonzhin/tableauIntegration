@@ -1,0 +1,33 @@
+#+ summary: Time-traveling for panden in a buurt
+#+ tags: 
+#+   - buurtNaam
+
+Prefix bag:<http://bag.basisregistraties.overheid.nl/def/bag#> 
+Prefix geo: <http://www.opengis.net/ont/geosparql#> 
+Prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+Prefix cbs_vocab: <https://data.pdok.nl/cbs/vocab/>
+Prefix cbs_def: <https://data.pdok.nl/cbs/def/>
+ 
+select distinct  ?pand ?pandID ?year ?voorkomenPand ?beginPand ?endPand  ?wkt
+{
+  Service <https://data.labs.pdok.nl/sparql> { 
+	Graph <http://data.pdok.nl/linksets/Verblijfsobjecten2Buurten2016>{
+      ?s ?p ?o}
+ 	Graph <https://data.pdok.nl/cbs/2015> {
+      ?buurt cbs_def:BU_CODE ?buurtCode;
+             cbs_def:BU_NAAM ?_buurtNaam .}   
+ 	Graph <https://data.pdok.nl/cbs/wijken_buurten_2016> {
+      ?o cbs_vocab:regioaanduiding_Codering_code ?buurtCode}  
+  }  
+  ?s rdfs:isDefinedBy ?voorkomen.
+  ?voorkomen bag:beginGeldigheid ?begin. 
+#  filter not exists { ?voorkomen bag:eindGeldigheid [] } 
+  ?s bag:pandrelatering ?pand. 
+  ?pand bag:identificatiecode ?pandID;
+		geo:hasGeometry/geo:asWKT ?wkt;
+        bag:oorspronkelijkBouwjaar ?year;
+		rdfs:isDefinedBy ?voorkomenPand . 
+?voorkomenPand bag:beginGeldigheid ?beginPand. 
+#filter not exists  {?voorkomenPand bag:eindGeldigheid []} 
+ Optional {?voorkomenPand bag:eindGeldigheid ?endPand} 
+} 
