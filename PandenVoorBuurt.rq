@@ -1,6 +1,8 @@
 #+ summary: Time-traveling for panden in a buurt
+#+ endpoint: https://data.pdok.nl/sparql
 #+ tags: 
 #+   - buurtNaam
+
 
 Prefix bag:<http://bag.basisregistraties.overheid.nl/def/bag#> 
 Prefix geo: <http://www.opengis.net/ont/geosparql#> 
