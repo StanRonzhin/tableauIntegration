@@ -1,6 +1,8 @@
 
 #+ summary: Stadiumbuurt
 #+ endpoint: https://data.pdok.nl/sparql
+#+ tags: 
+#+   - buurtCode
 
 
 Prefix bag:<http://bag.basisregistraties.overheid.nl/def/bag#> 
@@ -14,6 +16,6 @@ select distinct  *
 {
   Service <https://data.labs.pdok.nl/sparql> { 
  	Graph <https://data.pdok.nl/cbs/wijken_buurten_2016> {
-      ?s cbs_vocab:regioaanduiding_Codering_code "BU03634803";
+      ?s cbs_vocab:regioaanduiding_Codering_code ?_buurtCode ;
 <http://www.opengis.net/ont/geosparql#hasGeometry>/<http://www.opengis.net/ont/geosparql#asWKT> ?wkt.}  
   } 
