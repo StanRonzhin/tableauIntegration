@@ -1,0 +1,19 @@
+
+#+ summary: Stadiumbuurt
+#+ endpoint: https://data.pdok.nl/sparql
+
+
+Prefix bag:<http://bag.basisregistraties.overheid.nl/def/bag#> 
+Prefix geo: <http://www.opengis.net/ont/geosparql#> 
+Prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+Prefix cbs_vocab: <https://data.pdok.nl/cbs/vocab/>
+Prefix cbs_def: <https://data.pdok.nl/cbs/def/>
+
+
+select distinct  *
+{
+  Service <https://data.labs.pdok.nl/sparql> { 
+ 	Graph <https://data.pdok.nl/cbs/wijken_buurten_2016> {
+      ?s cbs_vocab:regioaanduiding_Codering_code "BU03634803";
+<http://www.opengis.net/ont/geosparql#hasGeometry>/<http://www.opengis.net/ont/geosparql#asWKT> ?wkt.}  
+  } 
